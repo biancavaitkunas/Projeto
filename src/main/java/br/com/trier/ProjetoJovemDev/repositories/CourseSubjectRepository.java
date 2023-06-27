@@ -12,8 +12,9 @@ import br.com.trier.ProjetoJovemDev.domain.Subject;
 @Repository
 public interface CourseSubjectRepository extends JpaRepository<CourseSubject, Integer>{
 	
-	List<CourseSubject> findByDissaprovedSubjects(Course course);
-	List<CourseSubject> findByAprovedSubjects(Course course);
+	//List<CourseSubject> findByDissaprovedSubjects(Course course);
+	//List<CourseSubject> findByAprovedSubjects(Course course);
 	List<CourseSubject> findBySubject(Subject subject);
+	List<CourseSubject> findByCourse(Course course);
 
 }

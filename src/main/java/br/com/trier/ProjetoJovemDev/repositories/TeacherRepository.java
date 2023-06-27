@@ -10,6 +10,6 @@ import br.com.trier.ProjetoJovemDev.domain.Teacher;
 @Repository
 public interface TeacherRepository extends JpaRepository<Teacher, Integer>{
 	
-	List<Teacher> findByName (String name);
+	List<Teacher> findByNameStartingWithIgnoreCase (String name);
 
 }

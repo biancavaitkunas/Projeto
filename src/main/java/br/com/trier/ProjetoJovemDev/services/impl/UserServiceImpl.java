@@ -1,7 +1,9 @@
 package br.com.trier.ProjetoJovemDev.services.impl;
 
 import java.time.ZonedDateTime;
+
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,15 +20,20 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	UserRepository repository;
 	
-	private void findByEmail(User obj) {
-		if (repository.findByEmail(obj.getEmail()) != null && repository.findByEmail(obj.getEmail()).get().getId() != obj.getId()) {
+	private void validateUser(User obj) {
+		
+		if (repository.findByEmail(obj.getEmail()) != null) {
+			throw new IntegrityViolation("Email não pode ser nulo");
+		}
+		
+		if(repository.findByEmail(obj.getEmail()).getId() != obj.getId()) {
 			throw new IntegrityViolation("Email %s já existe".formatted(obj.getEmail()));
 		}
 	}
 
 	@Override
 	public User insert(User user) {
-		findByEmail(user);
+		validateUser(user);
 		return repository.save(user);
 	}
 
@@ -40,13 +47,13 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User findById(Integer id) {
-		//Optional<User> obj = repository.findById(id);
-		return repository.findById(id).orElseThrow(()-> new ObjectNotFound("Usuário %s não encontrado".formatted(id)));
+		Optional<User> obj = repository.findById(id);
+		return obj.orElseThrow(()-> new ObjectNotFound("Usuário %s não encontrado".formatted(id)));
 	}
 
 	@Override
 	public User update(User user) {
-		findByEmail(user);
+		validateUser(user);
 		return repository.save(user);
 	}
 
@@ -62,14 +69,6 @@ public class UserServiceImpl implements UserService{
 			throw new ObjectNotFound("Nenhum usuário encontrado");			
 		}
 		return repository.findByNameStartingWithIgnoreCase(name);
-	}
-
-	@Override
-	public List<User> findByName(String name) {
-		if(repository.findByName(name).isEmpty()) {
-			throw new ObjectNotFound("Nenhum usuário encontrado");			
-		}
-		return repository.findByName(name);
 	}
 
 	@Override

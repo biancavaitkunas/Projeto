@@ -2,6 +2,8 @@ package br.com.trier.ProjetoJovemDev.domain;
 
 import java.time.ZonedDateTime;
 
+import br.com.trier.ProjetoJovemDev.domain.dto.UserDTO;
+import br.com.trier.ProjetoJovemDev.utils.DateUtils;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +19,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode (of = "id")
-@Entity (name = "user")
+@Entity (name = "usuario")
 public class User {
 	
 	@Id
@@ -38,16 +40,16 @@ public class User {
 	@Column(name = "gender")
 	private String gender;
 	
-	@Column(name = "date")
+	@Column(name = "dateOfBirth")
 	private ZonedDateTime dateOfBirth;
 	
-	/*public User (UserDTO dto) {
-		this(dto.getId(), dto.getName(), dto.getEmail(), dto.getPassword(), dto.getRoles());
+	public User (UserDTO dto) {
+		this(dto.getId(), dto.getName(), dto.getEmail(), dto.getPassword(), dto.getGender(), DateUtils.strToZonedDateTime(dto.getDateOfBirth()));
 	}
 	
 	public UserDTO ToDto() {
-		return new UserDTO(this.id, this.name, this.email, this.password, this.roles);
-	}*/
+		return new UserDTO(this.id, this.name, this.email, this.password, this.gender, DateUtils.ZonedDateTimeToStr(dateOfBirth));
+	}
 	
 
 }
