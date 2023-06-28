@@ -31,9 +31,6 @@ public class CourseSubject {
 	@ManyToOne
 	private Subject subject;
 	
-	@Column(name = "media")
-	private Double media;
-	
 	@ManyToOne
 	private Status status;
 

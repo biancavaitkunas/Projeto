@@ -24,7 +24,7 @@ public class Status {
 	@Setter
 	private Integer id;
 	
-	@Column(name = "description")
+	@Column(name = "description", unique = true)
 	private String description;
 
 }

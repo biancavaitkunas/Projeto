@@ -18,18 +18,19 @@ public class StatusServiceImpl implements StatusService{
 	@Autowired
 	StatusRespository repository;
 	
-	private void validateStatus (Status obj) {
-		if (repository.findByDescription(obj.getDescription()) != null) {
+	/*private void validateStatus (Status obj) {
+		Optional<Status> status = repository.findByDescription(obj.getDescription());
+		if (status != null && status.get().getId() != obj.getId()) {
 			throw new IntegrityViolation("Status não pode ser nulo");
 		}
-		if(repository.findByDescription(obj.getDescription()).getId() != obj.getId()) {
+		/*if(status.get().getId() != obj.getId()) {
 			throw new IntegrityViolation("Status %s já cadastrado".formatted(obj.getDescription()));
 		}
-	}
+	}*/
 
 	@Override
 	public Status insert(Status status) {
-		validateStatus(status);
+		//validateStatus(status);
 		return repository.save(status);
 	}
 
@@ -49,7 +50,7 @@ public class StatusServiceImpl implements StatusService{
 
 	@Override
 	public Status update(Status status) {
-		validateStatus(status);
+		//validateStatus(status);
 		return repository.save(status);
 	}
 
@@ -63,7 +64,7 @@ public class StatusServiceImpl implements StatusService{
 		if(repository.findByDescriptionStartingWithIgnoreCase(description) != null) {
 			throw new ObjectNotFound("Nenhum status encontrado");
 		}
-		return repository.findByDescription(description);
+		return repository.findByDescriptionStartingWithIgnoreCase(description);
 		//FIXME
 	}
 

@@ -2,7 +2,11 @@ package br.com.trier.ProjetoJovemDev.domain;
 
 import java.time.ZonedDateTime;
 
+import br.com.trier.ProjetoJovemDev.domain.dto.ActivityDTO;
+import br.com.trier.ProjetoJovemDev.domain.dto.UserDTO;
+import br.com.trier.ProjetoJovemDev.utils.DateUtils;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,5 +45,18 @@ public class Activity {
 	
 	@ManyToOne
 	private ActivityKind activityKind;
+	
+	/*public Activity (ActivityDTO dto) {
+		this(dto.getId(), dto.getDescription(), DateUtils.strToZonedDateTime(dto.getDeliveryDate()), dto.getSubjectId(), dto.getGrade(), dto.getActivityKindId());
+	}*/
+	
+	public Activity (ActivityDTO dto, Subject sub, ActivityKind ak) {
+		this(dto.getId(), dto.getDescription(), DateUtils.strToZonedDateTime(dto.getDeliveryDate()), sub, dto.getGrade(), ak);
+	}
+	
+	public ActivityDTO ToDto() {
+		return new ActivityDTO(this.id, this.description, DateUtils.ZonedDateTimeToStr(deliveryDate), this.subject.getId(), this.grade, this.activityKind.getId());
+	}
+
 
 }

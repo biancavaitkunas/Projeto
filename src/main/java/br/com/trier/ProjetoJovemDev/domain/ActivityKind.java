@@ -24,7 +24,7 @@ public class ActivityKind {
 	@Setter
 	private Integer id;
 	
-	@Column(name = "name_activityKind")
+	@Column(name = "name_activityKind", unique = true)
 	private String name;
 
 }

@@ -10,7 +10,7 @@ import br.com.trier.ProjetoJovemDev.domain.Subject;
 @Repository
 public interface SubjectRepository extends JpaRepository<Subject, Integer>{
 	
-	List<Subject> findByName (String name);
+	List<Subject> findByNameStartingWithIgnoreCase (String name);
 	
 
 }
