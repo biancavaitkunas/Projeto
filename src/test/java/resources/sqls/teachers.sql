@@ -1,0 +1,1 @@
+insert into teacher (id_teacher, name_teacher) values (1, 'Teacher 1'), (2, 'Teacher 2'), (3, 'Teacher 3');

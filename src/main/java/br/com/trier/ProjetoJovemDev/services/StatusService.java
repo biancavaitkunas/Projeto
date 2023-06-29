@@ -11,6 +11,6 @@ public interface StatusService {
 	Status findById(Integer id);
 	Status update(Status status);
 	void delete(Integer id);
-	Status findByDescriptionStartingWithIgnoreCase(String description);
+	List <Status> findByDescriptionStartingWithIgnoreCase(String description);
 
 }

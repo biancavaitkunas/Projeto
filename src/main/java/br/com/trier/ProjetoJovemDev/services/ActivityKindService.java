@@ -12,6 +12,6 @@ public interface ActivityKindService {
 	ActivityKind findById(Integer id);
 	ActivityKind update(ActivityKind activityKind);
 	void delete(Integer id);
-	Optional<ActivityKind> findByNameStartingWithIgnoreCase (String name);
+	List <ActivityKind> findByNameStartingWithIgnoreCase (String name);
 
 }

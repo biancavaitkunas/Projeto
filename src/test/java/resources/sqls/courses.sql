@@ -1,0 +1,1 @@
+insert into course (id_course, name_course, passing_grade, status_id_status) values (1, 'Direito', 7.0, 3), (2, 'Medicina', 6.0, 4), (3, 'Engenharia', 7.0, 3)

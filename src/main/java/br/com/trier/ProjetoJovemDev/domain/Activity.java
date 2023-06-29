@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -36,8 +37,8 @@ public class Activity {
 	@Column(name = "deliveryDate")
 	private ZonedDateTime deliveryDate;
 	
-	@Setter
 	@ManyToOne
+	//@JoinColumn(name = "subject", nullable=false)
 	private Subject subject;
 	
 	@Column(name = "grade")
@@ -47,7 +48,7 @@ public class Activity {
 	private ActivityKind activityKind;
 	
 	public Activity (ActivityDTO dto) {
-		this(dto.getId(), dto.getDescription(), DateUtils.strToZonedDateTime(dto.getDeliveryDate()), new Subject(dto.getSubjectId(), dto.getSubjectName(), null),
+		this(dto.getId(), dto.getDescription(), DateUtils.strToZonedDateTime(dto.getDeliveryDate()), new Subject(dto.getSubjectId(), dto.getSubjectName()/*, null*/),
 				dto.getGrade(), new ActivityKind(dto.getActivityKindId(), dto.getActivityKindName()));
 	}
 	

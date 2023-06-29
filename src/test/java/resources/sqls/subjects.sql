@@ -1,0 +1,1 @@
+insert into subject values (1, 'Matemática'), (2, 'História'), (3, 'Física');

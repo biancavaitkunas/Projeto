@@ -18,19 +18,16 @@ public class StatusServiceImpl implements StatusService{
 	@Autowired
 	StatusRespository repository;
 	
-	/*private void validateStatus (Status obj) {
-		Optional<Status> status = repository.findByDescription(obj.getDescription());
-		if (status != null && status.get().getId() != obj.getId()) {
+	private void findByDescription (Status obj) {
+		Status status = repository.findByDescription(obj.getDescription());
+		if (status != null && status.getId() != obj.getId()) {
 			throw new IntegrityViolation("Status não pode ser nulo");
 		}
-		/*if(status.get().getId() != obj.getId()) {
-			throw new IntegrityViolation("Status %s já cadastrado".formatted(obj.getDescription()));
-		}
-	}*/
+	}
 
 	@Override
 	public Status insert(Status status) {
-		//validateStatus(status);
+		findByDescription(status);
 		return repository.save(status);
 	}
 
@@ -50,7 +47,7 @@ public class StatusServiceImpl implements StatusService{
 
 	@Override
 	public Status update(Status status) {
-		//validateStatus(status);
+		findByDescription(status);
 		return repository.save(status);
 	}
 
@@ -60,12 +57,11 @@ public class StatusServiceImpl implements StatusService{
 	}
 
 	@Override
-	public Status findByDescriptionStartingWithIgnoreCase(String description) {
-		if(repository.findByDescriptionStartingWithIgnoreCase(description) != null) {
+	public List<Status> findByDescriptionStartingWithIgnoreCase(String description) {
+		if(repository.findByDescriptionStartingWithIgnoreCase(description).size() == 0) {
 			throw new ObjectNotFound("Nenhum status encontrado");
 		}
 		return repository.findByDescriptionStartingWithIgnoreCase(description);
-		//FIXME
 	}
 
 }

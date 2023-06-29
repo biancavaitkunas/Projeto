@@ -1,6 +1,7 @@
 package br.com.trier.ProjetoJovemDev.repositories;
 
-import java.util.Optional;
+
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -10,6 +11,6 @@ import br.com.trier.ProjetoJovemDev.domain.ActivityKind;
 @Repository
 public interface ActivityKindRepository extends JpaRepository<ActivityKind, Integer>{
 	
-	Optional<ActivityKind> findByNameStartingWithIgnoreCase (String name);
+	List <ActivityKind> findByNameStartingWithIgnoreCase (String name);
 
 }

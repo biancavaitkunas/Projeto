@@ -50,9 +50,11 @@ public class ActivityKindServiceImpl implements ActivityKindService{
 	}
 
 	@Override
-	public Optional<ActivityKind> findByNameStartingWithIgnoreCase(String name) {
-		Optional<ActivityKind> activityKind = repository.findByNameStartingWithIgnoreCase(name);
-		return Optional.ofNullable(activityKind.orElseThrow(() -> new ObjectNotFound("Tipo de atividade %s não encontrado".formatted(name))));
+	public List<ActivityKind> findByNameStartingWithIgnoreCase(String name) {
+		if (repository.findByNameStartingWithIgnoreCase(name).size() == 0) {
+			throw new ObjectNotFound("Nenhum Tipo de Atividade encontrado");
+		}
+		return repository.findByNameStartingWithIgnoreCase(name);
 	}
 
 }

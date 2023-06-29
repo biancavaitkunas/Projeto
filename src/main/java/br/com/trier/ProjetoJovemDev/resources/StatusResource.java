@@ -40,7 +40,7 @@ public class StatusResource {
 	}
 	
 	@GetMapping("/name/{name}")
-	public ResponseEntity<Status> findByDescriptionStartingWithIgnoreCase(@PathVariable String description){
+	public ResponseEntity<List<Status>> findByDescriptionStartingWithIgnoreCase(@PathVariable String description){
 		return ResponseEntity.ok(service.findByDescriptionStartingWithIgnoreCase(description));
 	}
 	

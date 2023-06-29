@@ -58,12 +58,13 @@ public class SubjectServiceImpl implements SubjectService{
 		List<Object[]> result = repository.calculateMediaGradesBySubject();
 		return repository.calculateMediaGradesBySubject();
 
-	}*/
+	}
 
 	@Override
-	public List<Subject> calculateMedia(Integer id) {
-		return repository.calculateMediaGradesBySubject();
-	}
+	public Double findAvgGradeById(Integer id) {
+		return repository.findAvgGradeById(id);
+        
+	}*/
 	
 
 }

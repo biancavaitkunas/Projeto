@@ -30,7 +30,7 @@ public class TeacherServiceImpl implements TeacherService{
 	@Override
 	public Teacher findById(Integer id) {
 		Optional<Teacher> obj = repository.findById(id);
-		return obj.orElseThrow(()-> new ObjectNotFound("Usuário %s não encontrado".formatted(id)));
+		return obj.orElseThrow(()-> new ObjectNotFound("Professor %s não encontrado".formatted(id)));
 	}
 
 	@Override

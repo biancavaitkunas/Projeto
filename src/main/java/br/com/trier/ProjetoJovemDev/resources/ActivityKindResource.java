@@ -44,7 +44,7 @@ public class ActivityKindResource {
 	}
 	
 	@GetMapping("/nome/{name}")
-	public ResponseEntity<Optional<ActivityKind>> findByNameStartingWithIgnoreCase(@PathVariable String name){
+	public ResponseEntity<List<ActivityKind>> findByNameStartingWithIgnoreCase(@PathVariable String name){
 		return ResponseEntity.ok(service.findByNameStartingWithIgnoreCase(name));
 	}
 	

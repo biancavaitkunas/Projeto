@@ -32,7 +32,7 @@ public class CourseServiceImpl implements CourseService{
 
 	@Override
 	public Course findById(Integer id) {
-		return repository.findById(id).orElseThrow();
+		return repository.findById(id).orElseThrow(() -> new ObjectNotFound("Curso %s não encontrado".formatted(id)));
 	}
 
 	@Override

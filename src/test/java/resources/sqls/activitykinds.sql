@@ -1,0 +1,1 @@
+insert into activity_kind values (1, 'Prova'), (2, 'Lição de Casa'), (3, 'Atividade');

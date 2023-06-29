@@ -1,0 +1,1 @@
+insert into status values (1, 'Aprovado'), (2, 'Reprovado'), (3, 'Cursando'), (4, 'Finalizado');

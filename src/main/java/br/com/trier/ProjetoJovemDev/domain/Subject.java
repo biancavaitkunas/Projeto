@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -33,7 +34,8 @@ public class Subject {
 	@Column(name = "name_subject")
 	private String name;
 	
-	@OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
+	/*@OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
+	//@JoinColumn(name = "disciplina_id")
     private List<Activity> activities = new ArrayList<>();
 	
 	public void addActivity(Activity activity) {
@@ -44,6 +46,6 @@ public class Subject {
 	
 	public boolean equal(Activity activity) {
 		return this.equals(activity.getSubject());
-	}
+	}*/
 
 }
