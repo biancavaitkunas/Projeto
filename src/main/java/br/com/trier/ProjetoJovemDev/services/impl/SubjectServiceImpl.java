@@ -2,6 +2,7 @@ package br.com.trier.ProjetoJovemDev.services.impl;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ public class SubjectServiceImpl implements SubjectService{
 	
 	@Autowired
 	SubjectRepository repository;
+	
 
 	@Override
 	public Subject insert(Subject subject) {
@@ -50,5 +52,18 @@ public class SubjectServiceImpl implements SubjectService{
 		}
 		return repository.findByNameStartingWithIgnoreCase(name);
 	}
+
+
+	/*public List<Object[]> calculateMediaGradesBySubject() {
+		List<Object[]> result = repository.calculateMediaGradesBySubject();
+		return repository.calculateMediaGradesBySubject();
+
+	}*/
+
+	@Override
+	public List<Subject> calculateMedia(Integer id) {
+		return repository.calculateMediaGradesBySubject();
+	}
+	
 
 }

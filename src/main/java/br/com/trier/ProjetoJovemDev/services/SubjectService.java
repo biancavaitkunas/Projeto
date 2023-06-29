@@ -12,6 +12,6 @@ public interface SubjectService {
 	Subject update(Subject subject);
 	void delete(Integer id);
 	List<Subject> findByNameStartingWithIgnoreCase (String name);
-
+	List<Subject> calculateMedia(Integer id);
 
 }

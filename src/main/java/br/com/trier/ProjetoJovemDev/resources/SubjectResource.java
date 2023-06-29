@@ -47,6 +47,11 @@ public class SubjectResource {
 		return ResponseEntity.ok(service.findByNameStartingWithIgnoreCase(name));
 	}
 	
+	@GetMapping("/media/{id}")
+	public ResponseEntity<List<Subject>> calculateMedia(@PathVariable Integer id){
+		return ResponseEntity.ok(service.calculateMedia(id));
+	}
+	
 	@PutMapping("/{id}")
 	public ResponseEntity<Subject> update (@PathVariable Integer id, @RequestBody Subject subject) {
 		subject.setId(id);

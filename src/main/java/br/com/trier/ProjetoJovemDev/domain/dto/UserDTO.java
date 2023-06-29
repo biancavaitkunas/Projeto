@@ -1,7 +1,5 @@
 package br.com.trier.ProjetoJovemDev.domain.dto;
 
-import java.time.ZonedDateTime;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;

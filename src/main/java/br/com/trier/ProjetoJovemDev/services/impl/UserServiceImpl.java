@@ -2,6 +2,7 @@ package br.com.trier.ProjetoJovemDev.services.impl;
 
 import java.time.ZonedDateTime;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	UserRepository repository;
 	
-	private void validateUser(User obj) {
+	/*private void validateUser(User obj) {
 		
 		if (repository.findByEmail(obj.getEmail()) != null) {
 			throw new IntegrityViolation("Email não pode ser nulo");
@@ -29,17 +30,17 @@ public class UserServiceImpl implements UserService{
 		if(repository.findByEmail(obj.getEmail()).getId() != obj.getId()) {
 			throw new IntegrityViolation("Email %s já existe".formatted(obj.getEmail()));
 		}
-	}
+	}*/
 
 	@Override
 	public User insert(User user) {
-		validateUser(user);
+		findByEmail(user);
 		return repository.save(user);
 	}
 
 	@Override
 	public List<User> listAll() {
-		if (repository.findAll().isEmpty()) {
+		if (repository.findAll().size() == 0) {
 			throw new ObjectNotFound("Nenhum usuário encontrado");
 		}
 		return repository.findAll();
@@ -53,7 +54,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User update(User user) {
-		validateUser(user);
+		findByEmail(user);
 		return repository.save(user);
 	}
 
@@ -65,7 +66,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public List<User> findByNameStartingWithIgnoreCase(String name) {
-		if(repository.findByNameStartingWithIgnoreCase(name).isEmpty()) {
+		if(repository.findByNameStartingWithIgnoreCase(name).size() == 0) {
 			throw new ObjectNotFound("Nenhum usuário encontrado");			
 		}
 		return repository.findByNameStartingWithIgnoreCase(name);
@@ -73,7 +74,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public List<User> findByDateOfBirth(ZonedDateTime dateOfBirth) {
-		if(repository.findByDateOfBirth(dateOfBirth).isEmpty()) {
+		if(repository.findByDateOfBirth(dateOfBirth).size() == 0) {
 			throw new ObjectNotFound("Nenhum usuário encontrado");			
 		}
 		return repository.findByDateOfBirth(dateOfBirth);
@@ -81,10 +82,17 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public List<User> findByGender(String gender) {
-		if(repository.findByGender(gender).isEmpty()) {
+		if(repository.findByGender(gender).size() == 0) {
 			throw new ObjectNotFound("Nenhum usuário encontrado");			
 		}
 		return repository.findByGender(gender);
+	}
+	
+	private void findByEmail(User obj) {
+		User user = repository.findByEmail(obj.getEmail());
+		if (user != null && user.getId() != obj.getId()) {
+			throw new IntegrityViolation("Email %s já existe".formatted(obj.getEmail()));
+		}
 	}
 
 }

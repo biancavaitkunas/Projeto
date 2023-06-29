@@ -1,8 +1,6 @@
 package br.com.trier.ProjetoJovemDev.domain.dto;
 
 
-import br.com.trier.ProjetoJovemDev.domain.ActivityKind;
-import br.com.trier.ProjetoJovemDev.domain.Subject;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +14,10 @@ public class ActivityDTO {
 	private String description;
 	private String deliveryDate;
 	private Integer subjectId;
+	private String subjectName;
 	private Double grade;
 	private Integer activityKindId;
+	private String activityKindName;
+
 
 }

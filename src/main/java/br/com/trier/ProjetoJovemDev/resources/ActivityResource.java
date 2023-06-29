@@ -2,6 +2,7 @@ package br.com.trier.ProjetoJovemDev.resources;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.trier.ProjetoJovemDev.domain.Activity;
-import br.com.trier.ProjetoJovemDev.domain.ActivityKind;
-import br.com.trier.ProjetoJovemDev.domain.Subject;
 import br.com.trier.ProjetoJovemDev.domain.dto.ActivityDTO;
 import br.com.trier.ProjetoJovemDev.services.ActivityKindService;
 import br.com.trier.ProjetoJovemDev.services.ActivityService;
@@ -35,8 +34,10 @@ public class ActivityResource {
 	private ActivityKindService activityKindService;
 	
 	@PostMapping
-	public ResponseEntity<ActivityDTO> insert (@RequestBody ActivityDTO activity) {
-		return service.insert(new Activity(activity)) != null ? ResponseEntity.ok(service.insert(new Activity(activity)).ToDto()) : ResponseEntity.badRequest().build();
+	public ResponseEntity<ActivityDTO> insert (@RequestBody ActivityDTO activityDTO) {
+		return ResponseEntity.ok(service.insert(new Activity(activityDTO, 
+				subjectService.findById(activityDTO.getSubjectId()), 
+				activityKindService.findById(activityDTO.getActivityKindId()))).ToDto());
 		 
 	}
 	
@@ -50,21 +51,27 @@ public class ActivityResource {
 		return ResponseEntity.ok(service.listAll().stream().map((user) -> user.ToDto()).toList());
 	}
 	
-	@GetMapping("/tipoAtividade/{activityKind}")
+	@GetMapping("/tipoAtividade/{activityKindId}")
 	public ResponseEntity<List<ActivityDTO>> findByActivityKind(@PathVariable Integer activityKindId){
-		return ResponseEntity.ok(service.findByActivityKind(activityKindService.findById(activityKindId)).stream().map((piloto) -> piloto.toDTO().toList());
+		return ResponseEntity.ok(service.findBySubject(subjectService.findById(activityKindId)).stream().map((activityKind) -> activityKind.ToDto()).toList());
+
 	}
 	
-	@GetMapping("/disciplina/{subject}")
-	public ResponseEntity<List<ActivityDTO>> findBySubject(@PathVariable Subject subject){
-		return ResponseEntity.ok(service.findBySubject(subject));
+	@GetMapping("/disciplina/{subjectId}")
+	public ResponseEntity<List<ActivityDTO>> findBySubject(@PathVariable Integer subjectId){
+		return ResponseEntity.ok(service.findBySubject(subjectService.findById(subjectId)).stream().map((subject) -> subject.ToDto()).toList());
 	}
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<ActivityDTO> update (@PathVariable Integer id, @RequestBody ActivityDTO activityDTO) {
+		subjectService.findById(activityDTO.getSubjectId());
+		activityKindService.findById(activityDTO.getActivityKindId());
+		Activity activity = new Activity();
 		activity.setId(id);
-		activity = service.update(activity);
-		return activity != null ? ResponseEntity.ok(activity) : ResponseEntity.badRequest().build();
+		return ResponseEntity.ok(service.insert(new Activity(activityDTO, 
+				subjectService.findById(activityDTO.getSubjectId()), 
+				activityKindService.findById(activityDTO.getActivityKindId())))
+				.ToDto());
 		
 	}
 	
