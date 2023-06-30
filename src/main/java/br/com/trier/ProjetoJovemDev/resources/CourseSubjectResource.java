@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.trier.ProjetoJovemDev.domain.Course;
 import br.com.trier.ProjetoJovemDev.domain.CourseSubject;
+import br.com.trier.ProjetoJovemDev.domain.Status;
 import br.com.trier.ProjetoJovemDev.domain.Subject;
 import br.com.trier.ProjetoJovemDev.services.CourseSubjectService;
 
@@ -50,6 +51,11 @@ public class CourseSubjectResource {
 	@GetMapping("/disciplina/{subject}")
 	public ResponseEntity<List<CourseSubject>> findBySubject(@PathVariable Subject subject){
 		return ResponseEntity.ok(service.findBySubject(subject));
+	}
+	
+	@GetMapping("/disciplina/{subject}")
+	public ResponseEntity<List<CourseSubject>> findByStatus(@PathVariable Status status){
+		return ResponseEntity.ok(service.findByStatus(status));
 	}
 	
 	@PutMapping("/{id}")

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import br.com.trier.ProjetoJovemDev.domain.Course;
 import br.com.trier.ProjetoJovemDev.domain.CourseSubject;
+import br.com.trier.ProjetoJovemDev.domain.Status;
 import br.com.trier.ProjetoJovemDev.domain.Subject;
 
 @Repository
@@ -16,5 +17,6 @@ public interface CourseSubjectRepository extends JpaRepository<CourseSubject, In
 	//List<CourseSubject> findByAprovedSubjects(Course course);
 	List<CourseSubject> findBySubject(Subject subject);
 	List<CourseSubject> findByCourse(Course course);
+	List<CourseSubject> findByStatus(Status status);
 
 }

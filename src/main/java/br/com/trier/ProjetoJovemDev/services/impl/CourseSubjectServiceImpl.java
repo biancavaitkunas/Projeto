@@ -2,14 +2,17 @@ package br.com.trier.ProjetoJovemDev.services.impl;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.trier.ProjetoJovemDev.domain.Course;
 import br.com.trier.ProjetoJovemDev.domain.CourseSubject;
+import br.com.trier.ProjetoJovemDev.domain.Status;
 import br.com.trier.ProjetoJovemDev.domain.Subject;
 import br.com.trier.ProjetoJovemDev.repositories.CourseRepository;
 import br.com.trier.ProjetoJovemDev.repositories.CourseSubjectRepository;
+import br.com.trier.ProjetoJovemDev.repositories.StatusRespository;
 import br.com.trier.ProjetoJovemDev.repositories.SubjectRepository;
 import br.com.trier.ProjetoJovemDev.services.CourseSubjectService;
 import br.com.trier.ProjetoJovemDev.services.exceptions.ObjectNotFound;
@@ -22,6 +25,9 @@ public class CourseSubjectServiceImpl implements CourseSubjectService{
 	
 	@Autowired
 	CourseRepository courseRepository;
+	
+	@Autowired
+	StatusRespository statusRepository;
 	
 	@Autowired
 	SubjectRepository subjectRepository;
@@ -66,6 +72,13 @@ public class CourseSubjectServiceImpl implements CourseSubjectService{
 	public void delete(Integer id) {
 		CourseSubject courseSubject = findById(id);
 		repository.delete(courseSubject);
+		
+	}
+
+	@Override
+	public List<CourseSubject> findByStatus(Status status) {
+		return repository.findByStatus(statusRepository.findById(status.getId()).orElseThrow(() -> 
+		new ObjectNotFound("Nenhum CursoDisciplina para o curso %s".formatted(status))));
 		
 	}
 

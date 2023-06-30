@@ -1,0 +1,1 @@
+insert into teacher_subject (id_teacher_subject, subject_id_subject, teacher_id_teacher) values (1, 1, 1), (2, 2, 2), (3, 3, 3);

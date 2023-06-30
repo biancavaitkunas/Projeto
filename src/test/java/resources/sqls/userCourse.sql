@@ -1,0 +1,1 @@
+insert into user_course (id_usercourse, course_id_course, user_id_user) values (1, 1, 1), (2, 2, 2), (3, 3, 3);

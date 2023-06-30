@@ -22,7 +22,10 @@ public class CourseSubjetcServiceTest {
 	CourseSubjectService service;
 	
 	@Autowired
-	CourseService courseservice;
+	CourseService courseService;
+	
+	@Autowired
+	StatusService statusService;
 	
 	@Autowired
 	SubjectService subjectService;
@@ -140,23 +143,23 @@ public class CourseSubjetcServiceTest {
 	}*/
 	
 	@Test
-	@DisplayName("Teste inserir curso")
+	@DisplayName("Teste inserir curso disciplina")
 	@Sql({"classpath:/resources/sqls/courses.sql"})
 	@Sql({"classpath:/resources/sqls/subjects.sql"})
 	@Sql({"classpath:/resources/sqls/coursesubjects.sql"})
 	void insertTeacherTest() {
-		CourseSubject courseSubject = new CourseSubject(1, "Direito",  7.0, statusService.findById(3));
+		CourseSubject courseSubject = new CourseSubject(1, courseService.findById(1), subjectService.findById(1), statusService.findById(1));
 		service.insert(courseSubject);
 		courseSubject = service.findById(1);
-		assertThat(course).isNotNull();
-		assertEquals(1, course.getId());
-		assertEquals(7.0, course.getPassingGrade());
-		assertEquals("Direito", course.getName());
-		assertEquals(3, course.getStatus().getId());
+		assertThat(courseSubject).isNotNull();
+		assertEquals(1, courseSubject.getId());
+		//assertEquals(7.0, course.getPassingGrade());
+		//assertEquals("Direito", course.getName());
+		//assertEquals(3, course.getStatus().getId());
 
 	}
 	
-	@Test
+	/*@Test
 	@DisplayName("Teste buscar curso por status")
 	@Sql({"classpath:/resources/sqls/courses.sql"})
 	@Sql({"classpath:/resources/sqls/subjects.sql"})
