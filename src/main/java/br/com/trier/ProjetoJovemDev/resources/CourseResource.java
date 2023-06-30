@@ -19,7 +19,7 @@ import br.com.trier.ProjetoJovemDev.services.CourseService;
 import br.com.trier.ProjetoJovemDev.services.StatusService;
 
 @RestController
-@RequestMapping(value = "/course")
+@RequestMapping(value = "/curso")
 public class CourseResource {
 	
 	//TESTES POSTMAN OK

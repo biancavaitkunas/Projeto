@@ -32,7 +32,7 @@ public class ActivityServiceTest extends BaseTests{
 	@Test
 	@DisplayName("Teste buscar atividade por id")
 	@Sql({"classpath:/resources/sqls/subjects.sql"})
-	@Sql({"classpath:/resources/sqls/activitykinds.sql"})
+	@Sql({"classpath:/resources/sqls/activityKind.sql"})
 	@Sql({"classpath:/resources/sqls/activity.sql"})
 	void findByIdTest() {
 		var activity = service.findById(1);
@@ -46,7 +46,7 @@ public class ActivityServiceTest extends BaseTests{
 	@Test
 	@DisplayName("Teste atividade curso por id inexistente")
 	@Sql({"classpath:/resources/sqls/subjects.sql"})
-	@Sql({"classpath:/resources/sqls/activitykinds.sql"})
+	@Sql({"classpath:/resources/sqls/activityKind.sql"})
 	@Sql({"classpath:/resources/sqls/activity.sql"})
 	void findByIdNotFoundTest() {
 		var exception = assertThrows(ObjectNotFound.class, () -> service.findById(5));
@@ -57,7 +57,7 @@ public class ActivityServiceTest extends BaseTests{
 	@Test
 	@DisplayName("Listar todos os usuários curso")
 	@Sql({"classpath:/resources/sqls/subjects.sql"})
-	@Sql({"classpath:/resources/sqls/activitykinds.sql"})
+	@Sql({"classpath:/resources/sqls/activityKind.sql"})
 	@Sql({"classpath:/resources/sqls/activity.sql"})
 	void listAllTest() {
 		List<Activity> lista = service.listAll();
@@ -70,7 +70,7 @@ public class ActivityServiceTest extends BaseTests{
 	@Test
 	@DisplayName("Teste alterar atividade")
 	@Sql({"classpath:/resources/sqls/subjects.sql"})
-	@Sql({"classpath:/resources/sqls/activitykinds.sql"})
+	@Sql({"classpath:/resources/sqls/activityKind.sql"})
 	@Sql({"classpath:/resources/sqls/activity.sql"})
 	void alterTest() {
 		var activity = new Activity(1, "Prova de matemática", DateUtils.strToZonedDateTime("30/06/2023"), subjectService.findById(1),  
@@ -86,7 +86,7 @@ public class ActivityServiceTest extends BaseTests{
 	@Test
 	@DisplayName("Teste alterar atividade inexistente")
 	@Sql({"classpath:/resources/sqls/subjects.sql"})
-	@Sql({"classpath:/resources/sqls/activitykinds.sql"})
+	@Sql({"classpath:/resources/sqls/activityKind.sql"})
 	@Sql({"classpath:/resources/sqls/activity.sql"})
 	void alterTeacherNotFoundTest() {
 		var exception = assertThrows(ObjectNotFound.class, () -> service.delete(10));
@@ -97,7 +97,7 @@ public class ActivityServiceTest extends BaseTests{
 	@Test
 	@DisplayName("Teste deletar atividade")
 	@Sql({"classpath:/resources/sqls/subjects.sql"})
-	@Sql({"classpath:/resources/sqls/activitykinds.sql"})
+	@Sql({"classpath:/resources/sqls/activityKind.sql"})
 	@Sql({"classpath:/resources/sqls/activity.sql"})
 	void deleteTeacherTest() {
 		service.delete(1);
@@ -109,7 +109,7 @@ public class ActivityServiceTest extends BaseTests{
 	@Test
 	@DisplayName("Teste deletar atividade inexistente")
 	@Sql({"classpath:/resources/sqls/subjects.sql"})
-	@Sql({"classpath:/resources/sqls/activitykinds.sql"})
+	@Sql({"classpath:/resources/sqls/activityKind.sql"})
 	@Sql({"classpath:/resources/sqls/activity.sql"})
 	void deleteNonExistingUserTest() {
 		var exception = assertThrows(ObjectNotFound.class, () -> service.delete(10));
@@ -122,7 +122,7 @@ public class ActivityServiceTest extends BaseTests{
 	@Test
 	@DisplayName("Teste buscar atividade por disciplina")
 	@Sql({"classpath:/resources/sqls/subjects.sql"})
-	@Sql({"classpath:/resources/sqls/activitykinds.sql"})
+	@Sql({"classpath:/resources/sqls/activityKind.sql"})
 	@Sql({"classpath:/resources/sqls/activity.sql"})
 	void findByTeacherTest() {
 		List<Activity> lista = service.findBySubject(subjectService.findById(1));
@@ -133,7 +133,7 @@ public class ActivityServiceTest extends BaseTests{
 	@Test
 	@DisplayName("Teste buscar atividade por tipo")
 	@Sql({"classpath:/resources/sqls/subjects.sql"})
-	@Sql({"classpath:/resources/sqls/activitykinds.sql"})
+	@Sql({"classpath:/resources/sqls/activityKind.sql"})
 	@Sql({"classpath:/resources/sqls/activity.sql"})
 	void findBySubjectTest() {
 		List<Activity> lista = service.findByActivityKind(activityKindService.findById(1));
@@ -144,7 +144,7 @@ public class ActivityServiceTest extends BaseTests{
 	@Test
 	@DisplayName("Teste inserir atividade")
 	@Sql({"classpath:/resources/sqls/subjects.sql"})
-	@Sql({"classpath:/resources/sqls/activitykinds.sql"})
+	@Sql({"classpath:/resources/sqls/activityKind.sql"})
 	void insertTeacherTest() {
 		Activity activity = new Activity(1, "Prova de matemática", DateUtils.strToZonedDateTime("30/06/2023"), subjectService.findById(1),  
 				8.0, activityKindService.findById(1));

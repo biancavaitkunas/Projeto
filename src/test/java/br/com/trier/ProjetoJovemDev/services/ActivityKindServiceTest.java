@@ -1,6 +1,7 @@
 package br.com.trier.ProjetoJovemDev.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -13,7 +14,6 @@ import org.springframework.test.context.jdbc.Sql;
 
 import br.com.trier.ProjetoJovemDev.BaseTests;
 import br.com.trier.ProjetoJovemDev.domain.ActivityKind;
-import br.com.trier.ProjetoJovemDev.domain.Subject;
 import br.com.trier.ProjetoJovemDev.services.exceptions.ObjectNotFound;
 import jakarta.transaction.Transactional;
 
@@ -25,7 +25,7 @@ public class ActivityKindServiceTest extends BaseTests{
 	
 	@Test
 	@DisplayName("Teste buscar tipo de atividade por id")
-	@Sql({"classpath:/resources/sqls/activitykinds.sql"})
+	@Sql({"classpath:/resources/sqls/activityKind.sql"})
 	void findByIdTest() {
 		var activityKind = service.findById(1);
 		assertThat(activityKind).isNotNull();
@@ -35,7 +35,7 @@ public class ActivityKindServiceTest extends BaseTests{
 	
 	@Test
 	@DisplayName("Teste buscar tipo de atividade por id inexistente")
-	@Sql({"classpath:/resources/sqls/activitykinds.sql"})
+	@Sql({"classpath:/resources/sqls/activityKind.sql"})
 	void findByIdNotFoundTest() {
 		var exception = assertThrows(ObjectNotFound.class, () -> service.findById(5));
 		assertEquals("Tipo de atividade 5 não encontrado", exception.getMessage());
@@ -44,7 +44,7 @@ public class ActivityKindServiceTest extends BaseTests{
 	
 	@Test
 	@DisplayName("Listar todos os tipos de atividade")
-	@Sql({"classpath:/resources/sqls/activitykinds.sql"})
+	@Sql({"classpath:/resources/sqls/activityKind.sql"})
 	void listAllTest() {
 		List<ActivityKind> lista = service.listAll();
 		assertThat(lista).isNotNull();
@@ -55,7 +55,7 @@ public class ActivityKindServiceTest extends BaseTests{
 	
 	@Test
 	@DisplayName("Teste alterar tipo de atividade")
-	@Sql({"classpath:/resources/sqls/activitykinds.sql"})
+	@Sql({"classpath:/resources/sqls/activityKind.sql"})
 	void alterTeacherTest() {
 		var activityKind = new ActivityKind(1, "Altera");
 		service.update(activityKind);
@@ -68,7 +68,7 @@ public class ActivityKindServiceTest extends BaseTests{
 	
 	@Test
 	@DisplayName("Teste alterar tipo de atividade inexistente")
-	@Sql({"classpath:/resources/sqls/activitykinds.sql"})
+	@Sql({"classpath:/resources/sqls/activityKind.sql"})
 	void alterTeacherNotFoundTest() {
 		var exception = assertThrows(ObjectNotFound.class, () -> service.delete(10));
 		assertEquals("Tipo de atividade 10 não encontrado", exception.getMessage());
@@ -79,7 +79,7 @@ public class ActivityKindServiceTest extends BaseTests{
 	
 	@Test
 	@DisplayName("Teste deletar tipo de atividade")
-	@Sql({"classpath:/resources/sqls/activitykinds.sql"})
+	@Sql({"classpath:/resources/sqls/activityKind.sql"})
 	void deleteTeacherTest() {
 		service.delete(1);
 		List<ActivityKind> lista = service.listAll();
@@ -89,7 +89,7 @@ public class ActivityKindServiceTest extends BaseTests{
 	
 	@Test
 	@DisplayName("Teste deletar tipo de atividade inexistente")
-	@Sql({"classpath:/resources/sqls/activitykinds.sql"})
+	@Sql({"classpath:/resources/sqls/activityKind.sql"})
 	void deleteNonExistingUserTest() {
 		var exception = assertThrows(ObjectNotFound.class, () -> service.delete(10));
 		assertEquals("Tipo de atividade 10 não encontrado", exception.getMessage());
@@ -100,7 +100,7 @@ public class ActivityKindServiceTest extends BaseTests{
 	
 	@Test
 	@DisplayName("Teste buscar tipo de atividade por nome que inicia com")
-	@Sql({"classpath:/resources/sqls/activitykinds.sql"})
+	@Sql({"classpath:/resources/sqls/activityKind.sql"})
 	void findUserByNameStartsWithTest() {
 		List<ActivityKind> lista = service.findByNameStartingWithIgnoreCase("p");
 		assertEquals(1, lista.size());
@@ -108,7 +108,7 @@ public class ActivityKindServiceTest extends BaseTests{
 	
 	@Test
 	@DisplayName("Teste buscar tipo de atividade por nome que inicia com inexistente")
-	@Sql({"classpath:/resources/sqls/activitykinds.sql"})
+	@Sql({"classpath:/resources/sqls/activityKind.sql"})
 	void findUserByNameStartsWithNotFoundTest() {
 		var exception = assertThrows(ObjectNotFound.class, () -> service.findByNameStartingWithIgnoreCase("X"));
 		assertEquals("Nenhum Tipo de Atividade encontrado", exception.getMessage());

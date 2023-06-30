@@ -17,7 +17,7 @@ import br.com.trier.ProjetoJovemDev.domain.Subject;
 import br.com.trier.ProjetoJovemDev.services.SubjectService;
 
 @RestController
-@RequestMapping(value = "/subject")
+@RequestMapping(value = "/disciplina")
 public class SubjectResource {
 	
 	//TESTES POSTMAN OK

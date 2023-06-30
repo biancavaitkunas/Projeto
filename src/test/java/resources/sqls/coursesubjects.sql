@@ -1,1 +1,0 @@
-insert into course_subject (id_course_subject, course_id_course, status_id_status, subject_id_subject) values (1, 1, 1, 1), (1, 1, 2, 2), (1, 1, 1, 3);

@@ -1,7 +1,7 @@
 package br.com.trier.ProjetoJovemDev.domain;
 
 import java.time.ZonedDateTime;
-import java.util.List;
+
 
 import br.com.trier.ProjetoJovemDev.domain.dto.ActivityDTO;
 import br.com.trier.ProjetoJovemDev.utils.DateUtils;
@@ -10,7 +10,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -60,6 +59,7 @@ public class Activity {
 		return new ActivityDTO(this.id, this.description, DateUtils.ZonedDateTimeToStr(deliveryDate), this.subject.getId(), this.subject.getName(), 
 				this.grade, this.activityKind.getId(), this.activityKind.getName());
 	}
+	
 
 
 }

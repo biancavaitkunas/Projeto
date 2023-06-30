@@ -1,6 +1,7 @@
 package br.com.trier.ProjetoJovemDev.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -32,7 +33,7 @@ public class TeacherSubjectServiceTest extends BaseTests{
 	@DisplayName("Teste buscar professor disciplina por id")
 	@Sql({"classpath:/resources/sqls/teachers.sql"})
 	@Sql({"classpath:/resources/sqls/subjects.sql"})
-	@Sql({"classpath:/resources/sqls/teachersubjects.sql"})
+	@Sql({"classpath:/resources/sqls/teacherSubject.sql"})
 	void findByIdTest() {
 		var teacherSubject = service.findById(1);
 		assertThat(teacherSubject).isNotNull();
@@ -44,7 +45,7 @@ public class TeacherSubjectServiceTest extends BaseTests{
 	@DisplayName("Teste buscar professor disciplina por id inexistente")
 	@Sql({"classpath:/resources/sqls/teachers.sql"})
 	@Sql({"classpath:/resources/sqls/subjects.sql"})
-	@Sql({"classpath:/resources/sqls/teachersubjects.sql"})
+	@Sql({"classpath:/resources/sqls/teacherSubject.sql"})
 	void findByIdNotFoundTest() {
 		var exception = assertThrows(ObjectNotFound.class, () -> service.findById(5));
 		assertEquals("Professor Disciplina 5 não encontrado", exception.getMessage());
@@ -55,7 +56,7 @@ public class TeacherSubjectServiceTest extends BaseTests{
 	@DisplayName("Listar todos os professores disciplina")
 	@Sql({"classpath:/resources/sqls/teachers.sql"})
 	@Sql({"classpath:/resources/sqls/subjects.sql"})
-	@Sql({"classpath:/resources/sqls/teachersubjects.sql"})
+	@Sql({"classpath:/resources/sqls/teacherSubject.sql"})
 	void listAllTest() {
 		List<TeacherSubject> lista = service.listAll();
 		assertThat(lista).isNotNull();
@@ -68,7 +69,7 @@ public class TeacherSubjectServiceTest extends BaseTests{
 	@DisplayName("Teste alterar professor disciplina")
 	@Sql({"classpath:/resources/sqls/teachers.sql"})
 	@Sql({"classpath:/resources/sqls/subjects.sql"})
-	@Sql({"classpath:/resources/sqls/teachersubjects.sql"})
+	@Sql({"classpath:/resources/sqls/teacherSubject.sql"})
 	void alterTeacherTest() {
 		var teacherSubject = new TeacherSubject(1, subjectService.findById(2), teacherService.findById(1));
 		service.update(teacherSubject);
@@ -83,7 +84,7 @@ public class TeacherSubjectServiceTest extends BaseTests{
 	@DisplayName("Teste alterar professor disciplina inexistente")
 	@Sql({"classpath:/resources/sqls/teachers.sql"})
 	@Sql({"classpath:/resources/sqls/subjects.sql"})
-	@Sql({"classpath:/resources/sqls/teachersubjects.sql"})
+	@Sql({"classpath:/resources/sqls/teacherSubject.sql"})
 	void alterTeacherNotFoundTest() {
 		var exception = assertThrows(ObjectNotFound.class, () -> service.delete(10));
 		assertEquals("Professor Disciplina 10 não encontrado", exception.getMessage());
@@ -94,7 +95,7 @@ public class TeacherSubjectServiceTest extends BaseTests{
 	@DisplayName("Teste deletar professor disciplina")
 	@Sql({"classpath:/resources/sqls/teachers.sql"})
 	@Sql({"classpath:/resources/sqls/subjects.sql"})
-	@Sql({"classpath:/resources/sqls/teachersubjects.sql"})
+	@Sql({"classpath:/resources/sqls/teacherSubject.sql"})
 	void deleteTeacherTest() {
 		service.delete(1);
 		List<TeacherSubject> lista = service.listAll();
@@ -106,7 +107,7 @@ public class TeacherSubjectServiceTest extends BaseTests{
 	@DisplayName("Teste deletar professor disciplina inexistente")
 	@Sql({"classpath:/resources/sqls/teachers.sql"})
 	@Sql({"classpath:/resources/sqls/subjects.sql"})
-	@Sql({"classpath:/resources/sqls/teachersubjects.sql"})
+	@Sql({"classpath:/resources/sqls/teacherSubject.sql"})
 	void deleteNonExistingUserTest() {
 		var exception = assertThrows(ObjectNotFound.class, () -> service.delete(10));
 		assertEquals("Professor Disciplina 10 não encontrado", exception.getMessage());
@@ -119,7 +120,7 @@ public class TeacherSubjectServiceTest extends BaseTests{
 	@DisplayName("Teste buscar professor disciplina por professor")
 	@Sql({"classpath:/resources/sqls/teachers.sql"})
 	@Sql({"classpath:/resources/sqls/subjects.sql"})
-	@Sql({"classpath:/resources/sqls/teachersubjects.sql"})
+	@Sql({"classpath:/resources/sqls/teacherSubject.sql"})
 	void findByTeacherTest() {
 		List<TeacherSubject> lista = service.findByTeacher(teacherService.findById(1));
 		assertEquals(1, lista.size());
@@ -130,11 +131,11 @@ public class TeacherSubjectServiceTest extends BaseTests{
 	@DisplayName("Teste buscar professor disciplina por disciplina")
 	@Sql({"classpath:/resources/sqls/teachers.sql"})
 	@Sql({"classpath:/resources/sqls/subjects.sql"})
-	@Sql({"classpath:/resources/sqls/teachersubjects.sql"})
+	@Sql({"classpath:/resources/sqls/teacherSubject.sql"})
 	void findBySubjectTest() {
-		List<TeacherSubject> lista = service.findBySubject(subjectService.findById(3));
+		List<TeacherSubject> lista = service.findBySubject(subjectService.findById(1));
 		assertEquals(1, lista.size());
-		assertEquals("Matemática", lista.get(0).getTeacher().getName());
+		assertEquals("Matemática", lista.get(0).getSubject().getName());
 	}
 	
 	@Test
@@ -150,5 +151,7 @@ public class TeacherSubjectServiceTest extends BaseTests{
 		assertEquals("História", teacherSubject.getSubject().getName());
 
 	}
+	
+	
 
 }

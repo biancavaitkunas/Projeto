@@ -1,7 +1,7 @@
 package br.com.trier.ProjetoJovemDev.services;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import br.com.trier.ProjetoJovemDev.domain.ActivityKind;
 

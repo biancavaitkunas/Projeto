@@ -1,9 +1,8 @@
 package br.com.trier.ProjetoJovemDev.domain;
 
-import java.time.ZonedDateTime;
+
 
 import br.com.trier.ProjetoJovemDev.domain.dto.UserDTO;
-import br.com.trier.ProjetoJovemDev.utils.DateUtils;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,15 +39,16 @@ public class User {
 	@Column(name = "gender")
 	private String gender;
 	
-	@Column(name = "dateOfBirth")
-	private ZonedDateTime dateOfBirth;
+	@Column(name = "permissoes_usuario")
+	private String roles;
+	
 	
 	public User (UserDTO dto) {
-		this(dto.getId(), dto.getName(), dto.getEmail(), dto.getPassword(), dto.getGender(), DateUtils.strToZonedDateTime(dto.getDateOfBirth()));
+		this(dto.getId(), dto.getName(), dto.getEmail(), dto.getPassword(), dto.getGender(),  dto.getRoles());
 	}
 	
 	public UserDTO ToDto() {
-		return new UserDTO(this.id, this.name, this.email, this.password, this.gender, DateUtils.ZonedDateTimeToStr(dateOfBirth));
+		return new UserDTO(this.id, this.name, this.email, this.password, this.gender, this.roles);
 	}
 	
 

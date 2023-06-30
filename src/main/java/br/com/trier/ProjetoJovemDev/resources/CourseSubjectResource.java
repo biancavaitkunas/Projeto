@@ -20,7 +20,7 @@ import br.com.trier.ProjetoJovemDev.domain.Subject;
 import br.com.trier.ProjetoJovemDev.services.CourseSubjectService;
 
 @RestController
-@RequestMapping(value = "/courseSubject")
+@RequestMapping(value = "/cursoDisciplina")
 public class CourseSubjectResource {
 	
 	@Autowired
@@ -53,7 +53,7 @@ public class CourseSubjectResource {
 		return ResponseEntity.ok(service.findBySubject(subject));
 	}
 	
-	@GetMapping("/disciplina/{subject}")
+	@GetMapping("/status/{status}")
 	public ResponseEntity<List<CourseSubject>> findByStatus(@PathVariable Status status){
 		return ResponseEntity.ok(service.findByStatus(status));
 	}

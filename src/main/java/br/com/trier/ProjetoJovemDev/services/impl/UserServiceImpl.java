@@ -1,6 +1,6 @@
 package br.com.trier.ProjetoJovemDev.services.impl;
 
-import java.time.ZonedDateTime;
+
 
 
 import java.util.List;
@@ -21,16 +21,12 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	UserRepository repository;
 	
-	/*private void validateUser(User obj) {
-		
-		if (repository.findByEmail(obj.getEmail()) != null) {
-			throw new IntegrityViolation("Email não pode ser nulo");
-		}
-		
-		if(repository.findByEmail(obj.getEmail()).getId() != obj.getId()) {
+	private void findByEmail(User obj) {
+		Optional<User> user = repository.findByEmail(obj.getEmail());
+		if (user != null && user.get().getId() != obj.getId()) {
 			throw new IntegrityViolation("Email %s já existe".formatted(obj.getEmail()));
 		}
-	}*/
+	}
 
 	@Override
 	public User insert(User user) {
@@ -48,8 +44,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User findById(Integer id) {
-		Optional<User> obj = repository.findById(id);
-		return obj.orElseThrow(()-> new ObjectNotFound("Usuário %s não encontrado".formatted(id)));
+		return repository.findById(id).orElseThrow(()-> new ObjectNotFound("Usuário %s não encontrado".formatted(id)));
 	}
 
 	@Override
@@ -73,14 +68,6 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public List<User> findByDateOfBirth(ZonedDateTime dateOfBirth) {
-		if(repository.findByDateOfBirth(dateOfBirth).size() == 0) {
-			throw new ObjectNotFound("Nenhum usuário encontrado");			
-		}
-		return repository.findByDateOfBirth(dateOfBirth);
-	}
-
-	@Override
 	public List<User> findByGender(String gender) {
 		if(repository.findByGender(gender).size() == 0) {
 			throw new ObjectNotFound("Nenhum usuário encontrado");			
@@ -88,11 +75,6 @@ public class UserServiceImpl implements UserService{
 		return repository.findByGender(gender);
 	}
 	
-	private void findByEmail(User obj) {
-		User user = repository.findByEmail(obj.getEmail());
-		if (user != null && user.getId() != obj.getId()) {
-			throw new IntegrityViolation("Email %s já existe".formatted(obj.getEmail()));
-		}
-	}
+	
 
 }

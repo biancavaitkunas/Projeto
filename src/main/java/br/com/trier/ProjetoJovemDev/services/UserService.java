@@ -1,6 +1,6 @@
 package br.com.trier.ProjetoJovemDev.services;
 
-import java.time.ZonedDateTime;
+
 
 import java.util.List;
 
@@ -15,7 +15,6 @@ public interface UserService {
 	User update(User user);
 	void delete(Integer id);
 	List <User> findByNameStartingWithIgnoreCase(String name);
-	List<User> findByDateOfBirth(ZonedDateTime dateOfBirth);
 	List<User> findByGender(String gender);
 
 }

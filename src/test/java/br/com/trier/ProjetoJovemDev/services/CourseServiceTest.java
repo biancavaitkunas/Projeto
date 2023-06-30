@@ -28,7 +28,7 @@ public class CourseServiceTest extends BaseTests{
 	@Test
 	@DisplayName("Teste buscar curso por id")
 	@Sql({"classpath:/resources/sqls/status.sql"})
-	@Sql({"classpath:/resources/sqls/courses.sql"})
+	@Sql({"classpath:/resources/sqls/course.sql"})
 	void findByIdTest() {
 		var curso = service.findById(1);
 		assertThat(curso).isNotNull();
@@ -39,7 +39,7 @@ public class CourseServiceTest extends BaseTests{
 	@Test
 	@DisplayName("Teste buscar curso por id inexistente")
 	@Sql({"classpath:/resources/sqls/status.sql"})
-	@Sql({"classpath:/resources/sqls/courses.sql"})
+	@Sql({"classpath:/resources/sqls/course.sql"})
 	void findByIdNotFoundTest() {
 		var exception = assertThrows(ObjectNotFound.class, () -> service.findById(5));
 		assertEquals("Curso 5 não encontrado", exception.getMessage());
@@ -49,7 +49,7 @@ public class CourseServiceTest extends BaseTests{
 	@Test
 	@DisplayName("Listar todos os cursos")
 	@Sql({"classpath:/resources/sqls/status.sql"})
-	@Sql({"classpath:/resources/sqls/courses.sql"})
+	@Sql({"classpath:/resources/sqls/course.sql"})
 	void listAllTest() {
 		List<Course> lista = service.listAll();
 		assertThat(lista).isNotNull();
@@ -61,7 +61,7 @@ public class CourseServiceTest extends BaseTests{
 	@Test
 	@DisplayName("Teste alterar curso")
 	@Sql({"classpath:/resources/sqls/status.sql"})
-	@Sql({"classpath:/resources/sqls/courses.sql"})
+	@Sql({"classpath:/resources/sqls/course.sql"})
 	void alterTeacherTest() {
 		var course = new Course(1, "Direito",  7.0, statusService.findById(3));
 		service.update(course);
@@ -77,7 +77,7 @@ public class CourseServiceTest extends BaseTests{
 	@Test
 	@DisplayName("Teste alterar curso inexistente")
 	@Sql({"classpath:/resources/sqls/status.sql"})
-	@Sql({"classpath:/resources/sqls/courses.sql"})
+	@Sql({"classpath:/resources/sqls/course.sql"})
 	void alterTeacherNotFoundTest() {
 		var exception = assertThrows(ObjectNotFound.class, () -> service.delete(10));
 		assertEquals("Curso 10 não encontrado", exception.getMessage());
@@ -89,7 +89,7 @@ public class CourseServiceTest extends BaseTests{
 	@Test
 	@DisplayName("Teste deletar curso")
 	@Sql({"classpath:/resources/sqls/status.sql"})
-	@Sql({"classpath:/resources/sqls/courses.sql"})
+	@Sql({"classpath:/resources/sqls/course.sql"})
 	void deleteTeacherTest() {
 		service.delete(1);
 		List<Course> lista = service.listAll();
@@ -100,7 +100,7 @@ public class CourseServiceTest extends BaseTests{
 	@Test
 	@DisplayName("Teste deletar curso inexistente")
 	@Sql({"classpath:/resources/sqls/status.sql"})
-	@Sql({"classpath:/resources/sqls/courses.sql"})
+	@Sql({"classpath:/resources/sqls/course.sql"})
 	void deleteNonExistingUserTest() {
 		var exception = assertThrows(ObjectNotFound.class, () -> service.delete(10));
 		assertEquals("Curso 10 não encontrado", exception.getMessage());
@@ -112,7 +112,7 @@ public class CourseServiceTest extends BaseTests{
 	@Test
 	@DisplayName("Teste buscar curso por nome que inicia com")
 	@Sql({"classpath:/resources/sqls/status.sql"})
-	@Sql({"classpath:/resources/sqls/courses.sql"})
+	@Sql({"classpath:/resources/sqls/course.sql"})
 	void findUserByNameStartsWithTest() {
 		List<Course> lista = service.findByNameStartingWithIgnoreCase("D");
 		assertEquals(1, lista.size());
@@ -121,7 +121,7 @@ public class CourseServiceTest extends BaseTests{
 	@Test
 	@DisplayName("Teste buscar curso por nome que inicia com inexistente")
 	@Sql({"classpath:/resources/sqls/status.sql"})
-	@Sql({"classpath:/resources/sqls/courses.sql"})
+	@Sql({"classpath:/resources/sqls/course.sql"})
 	void findUserByNameStartsWithNotFoundTest() {
 		var exception = assertThrows(ObjectNotFound.class, () -> service.findByNameStartingWithIgnoreCase("X"));
 		assertEquals("Nenhum curso encontrado", exception.getMessage());
@@ -145,7 +145,7 @@ public class CourseServiceTest extends BaseTests{
 	@Test
 	@DisplayName("Teste buscar curso por status")
 	@Sql({"classpath:/resources/sqls/status.sql"})
-	@Sql({"classpath:/resources/sqls/courses.sql"})
+	@Sql({"classpath:/resources/sqls/course.sql"})
 	void findByStatusTest() {
 		List<Course> lista = service.findByStatus(statusService.findById(3));
 		assertEquals(2, lista.size());

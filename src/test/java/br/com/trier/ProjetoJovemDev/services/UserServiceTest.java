@@ -2,6 +2,8 @@ package br.com.trier.ProjetoJovemDev.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -15,7 +17,6 @@ import org.springframework.test.context.jdbc.Sql;
 import br.com.trier.ProjetoJovemDev.BaseTests;
 import br.com.trier.ProjetoJovemDev.domain.User;
 import br.com.trier.ProjetoJovemDev.services.exceptions.ObjectNotFound;
-import br.com.trier.ProjetoJovemDev.utils.DateUtils;
 import jakarta.transaction.Transactional;
 
 @Transactional
@@ -39,7 +40,7 @@ public class UserServiceTest extends BaseTests{
 	@Test
 	@DisplayName("Teste inserir usuário")
 	void insertUserTest() {
-		User u = new User(1, "Bianca", "bianca@gmail.com", "bianca123", "feminino", DateUtils.strToZonedDateTime("21/08/2004"));
+		User u = new User(1, "Bianca", "bianca@gmail.com", "bianca123", "feminino", "ADMIN, USER");
 		service.insert(u);
 		u = service.findById(1);
 		assertThat(u).isNotNull();
@@ -65,7 +66,7 @@ public class UserServiceTest extends BaseTests{
 	void listAllTest() {
 		List<User> lista = service.listAll();
 		assertThat(lista).isNotNull();
-		assertEquals(1, lista.size());
+		assertEquals(2, lista.size());
 		assertEquals(1, lista.get(0).getId());
 
 	}
@@ -74,7 +75,7 @@ public class UserServiceTest extends BaseTests{
 	@DisplayName("Teste alterar usuários")
 	@Sql({"classpath:/resources/sqls/users.sql"})
 	void alterUserTest() {
-		var user = new User(1, "altera", "altera@gmail.com", "altera", "feminino", DateUtils.strToZonedDateTime("21/08/2004"));
+		var user = new User(1, "altera", "altera@gmail.com", "altera", "feminino", "ADMIN, USER");
 		service.update(user);
 		user = service.findById(1);
 		assertThat(user).isNotNull();
@@ -93,7 +94,7 @@ public class UserServiceTest extends BaseTests{
 		var exception = assertThrows(ObjectNotFound.class, () -> service.delete(10));
 		assertEquals("Usuário 10 não encontrado", exception.getMessage());
 		List<User> lista = service.listAll();
-		assertEquals(1, lista.size());
+		assertEquals(2, lista.size());
 	}
 	
 	
@@ -103,7 +104,7 @@ public class UserServiceTest extends BaseTests{
 	void deleteUserTest() {
 		service.delete(1);
 		List<User> lista = service.listAll();
-		assertEquals(0, lista.size());
+		assertEquals(1, lista.size());
 
 	}
 	
@@ -114,7 +115,7 @@ public class UserServiceTest extends BaseTests{
 		var exception = assertThrows(ObjectNotFound.class, () -> service.delete(10));
 		assertEquals("Usuário 10 não encontrado", exception.getMessage());
 		List<User> lista = service.listAll();
-		assertEquals(1, lista.size());
+		assertEquals(2, lista.size());
 
 	}
 	
@@ -123,7 +124,7 @@ public class UserServiceTest extends BaseTests{
 	@Sql({"classpath:/resources/sqls/users.sql"})
 	void findUserByNameStartsWithTest() {
 		List<User> lista = service.findByNameStartingWithIgnoreCase("U");
-		assertEquals(1, lista.size());
+		assertEquals(2, lista.size());
 	}
 	
 	@Test

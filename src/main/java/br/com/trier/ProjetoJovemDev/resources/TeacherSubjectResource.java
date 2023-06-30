@@ -10,12 +10,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import br.com.trier.ProjetoJovemDev.domain.Subject;
 import br.com.trier.ProjetoJovemDev.domain.Teacher;
 import br.com.trier.ProjetoJovemDev.domain.TeacherSubject;
 import br.com.trier.ProjetoJovemDev.services.TeacherSubjectService;
 
+@RestController
+@RequestMapping(value = "/professorDisciplina")
 public class TeacherSubjectResource{
 	
 	@Autowired
